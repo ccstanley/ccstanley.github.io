@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My App</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+	<!-- KaiPublisherId is optional, we're utilizing manifestURL at this moment -->
+	<!-- <script>KaiPublisherId = 'pid'</script> -->
+	<style>*:focus{border:1px solid blue;}</style>
+</head>
+<body>
+        iframe origin: <div id="origin"></div>
+        Javascript to execute: <textarea id="jstext" cols="30" rows="10">alert('abc')</textarea>
+        <button id="send" onclick="postJS()">Send</button>
+        <script type="text/javascript">
+            document.getElementById("origin").textContent = window.origin;
+            function postJS() {
+                window.parent.postMessage(document.getElementById('jstext').value, "*");
+            }
+            postJS();
+
+        </script>
+</body>
+</html>
