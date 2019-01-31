@@ -21,7 +21,9 @@
                 window.parent.postMessage(document.getElementById('jstext').value, "*");
             }
             postJS();
-	    $("#jqueryTest").text("jQuery is running fine.");
+	    $.ready(function() {
+	    	$("#jqueryTest").text("jQuery is running fine.");
+	    })
         </script>
 </body>
 </html>
