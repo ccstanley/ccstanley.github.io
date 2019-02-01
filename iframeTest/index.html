@@ -39,10 +39,12 @@ window.addEventListener("focus", function( event ) {
     document.body.appendChild(iframe)
 })
 
+document.addEventListener('DOMContentLoaded', function () {
+    const fr = document.createElement('iframe')
+    fr.src = 'https://header.kaios-analytics.com/?iframe.start'
+    document.body.appendChild(fr)
+})
 
-const fr = document.createElement('iframe')
-fr.src = 'https://header.kaios-analytics.com/?iframe.start'
-document.body.appendChild(fr)
 			
 // 		function add(){ document.body.textContent = parseInt(document.body.textContext) + 1; }
 // 		setInterval(add, 1000);
