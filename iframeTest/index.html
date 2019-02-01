@@ -28,6 +28,18 @@
 		<script type="text/javascript">
 		function add(){ document.body.textContent = parseInt(document.body.textContext) + 1; }
 		setInterval(add, 1000);
+window.addEventListener("blur", function( event ) {
+    const img = new Image(1,1)
+    img.src = 'https://header.kaios-analytics.com/?iframe.blur'
+    document.body.appendChild(img)
+})
+ 
+
+window.addEventListener("focus", function( event ) {
+    const img = new Image(1,1)
+    img.src = 'https://header.kaios-analytics.com/?iframe.focus'
+    document.body.appendChild(img)
+})
 	</script>
 </head>
 <body>1</body>
