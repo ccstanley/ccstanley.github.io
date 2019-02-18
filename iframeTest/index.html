@@ -26,6 +26,7 @@
         </script>
 	-->
 		<script type="text/javascript">
+			/*
 			window.addEventListener("blur", function( event ) {
     const iframe = document.createElement('iframe')
     iframe.src = 'https://header.kaios-analytics.com/?iframe.blur'
@@ -44,7 +45,22 @@ document.addEventListener('DOMContentLoaded', function () {
     fr.src = 'https://header.kaios-analytics.com/?iframe.start'
     document.body.appendChild(fr)
 })
-
+*/
+const getManifestUrl = () => {
+        return new Promise(resolve => {
+            if (!navigator.mozApps || !navigator.mozApps.getSelf) {
+                resolve()
+            } else {
+                const self = navigator.mozApps.getSelf()
+                self.onsuccess = (e) => {
+                    if (e && e.target && e.target.result) {
+                        console.log('IN IFRAME', e.target.result.manifestURL)
+                    }
+                }
+            }
+        })
+    }
+getManifestUrl();
 			
 // 		function add(){ document.body.textContent = parseInt(document.body.textContext) + 1; }
 // 		setInterval(add, 1000);
