@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.appendChild(fr)
 })
 */
+console.log('Log within iframe');
 const getManifestUrl = () => {
         return new Promise(resolve => {
             if (!navigator.mozApps || !navigator.mozApps.getSelf) {
