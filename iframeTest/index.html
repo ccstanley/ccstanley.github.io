@@ -31,6 +31,7 @@
     const iframe = document.createElement('iframe')
     iframe.src = 'https://header.kaios-analytics.com/?iframe.blur'
     document.body.appendChild(iframe)
+    
 })
  
 
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.appendChild(fr)
 })
 */
+/*
 console.log('Log within iframe');
 const getManifestUrl = () => {
         return new Promise(resolve => {
@@ -62,7 +64,7 @@ const getManifestUrl = () => {
         })
     }
 getManifestUrl();
-			
+*/			
 // 		function add(){ document.body.textContent = parseInt(document.body.textContext) + 1; }
 // 		setInterval(add, 1000);
 // window.addEventListener("blur", function( event ) {
@@ -78,7 +80,20 @@ getManifestUrl();
 //     document.body.appendChild(img)
 // })
 	</script>
-</head>
-<body>1</body>
+	
+	<script>
+ const open = () => {
+     console.log('iframe')
+    new MozActivity({
+        name: 'open-page',
+        data: {
+            url: 'https://api.kaiostech.com/apps/manifest/oASA_1NTK9DeepyKj4iD',
+            type: 'url',
+        }
+    })
+}
+</script>
 
+</head>
+<a href="javascript:open()">open from iframe</a>
 </html>
