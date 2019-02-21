@@ -82,7 +82,7 @@ getManifestUrl();
 	</script>
 	
 	<script>
- const open = () => {
+ const o = () => {
      console.log('iframe')
     new MozActivity({
         name: 'open-page',
@@ -95,5 +95,5 @@ getManifestUrl();
 </script>
 
 </head>
-<a href="javascript:open()">open from iframe</a>
+<a onclick="o()">open from iframe</a>
 </html>
