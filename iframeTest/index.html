@@ -82,6 +82,7 @@ getManifestUrl();
 	</script>
 	
 	<script>
+/*
  const o = () => {
      console.log('iframe')
     new MozActivity({
@@ -92,6 +93,10 @@ getManifestUrl();
         }
     })
 }
+*/
+document.addEventListener('DOMContentLoaded', function () {
+    window.parent.postMessage('alert("Hello from within-iframe!")', "*");
+})
 </script>
 
 </head>
