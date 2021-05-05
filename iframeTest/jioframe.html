@@ -10,6 +10,7 @@
     <style>
       body {
         margin: 0;
+        background-color: white;
       }
       .navbar {
         position: absolute;
@@ -42,6 +43,9 @@
       }
 
       const appOrigin = getParameterByName("o");
+      const reqWidth = getParameterByName("w");
+      const reqHeight = getParameterByName("h");
+
       const onKeyDown = (key) => {
         if (key === "Backspace" || key === "EndCall" || key === "SoftRight") {
           window.parent.postMessage(
@@ -53,7 +57,9 @@
           );
         }
       };
-      window.addEventListener("keydown", (e) => {onKeyDown(e.key)});
+      window.addEventListener("keydown", (e) => {
+        onKeyDown(e.key);
+      });
       window.addEventListener("message", (e) => {
         console.log(e);
         if (e.origin !== appOrigin) {
@@ -91,6 +97,15 @@
       <script>
         googletag.cmd.push(function () {
           googletag.display("div-gpt-ad-1589095880942-0");
+
+          // Scale to fit onto screen
+          const scale = Math.min(
+            parseInt(reqWidth) / 300,
+            parseInt(reqHeight) / 250
+          );
+          const tag = document.getElementById("div-gpt-ad-1589095880942-0");
+          tag.style.transform = `scale(${scale})`;
+          tag.style.transformOrigin = `0`;
         });
       </script>
     </div>
