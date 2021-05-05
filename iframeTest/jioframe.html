@@ -42,16 +42,8 @@
       }
 
       const appOrigin = getParameterByName("o");
-      window.addEventListener("message", (e) => {
-        console.log(e);
-        if (e.origin !== appOrigin) {
-          return;
-        }
-        const payload = JSON.parse(e.data);
-        if (
-          payload.event === "keydown" &&
-          (payload.args[0] === "Backspace" || payload.args[0] === "EndCall")
-        ) {
+      const onKeyDown = (key) => {
+        if (key === "Backspace" || key === "EndCall" || key === "SoftRight") {
           window.parent.postMessage(
             JSON.stringify({
               event: "close",
@@ -59,6 +51,17 @@
             }),
             appOrigin
           );
+        }
+      };
+      window.addEventListener("keydown", (e) => {onKeyDown(e.key)});
+      window.addEventListener("message", (e) => {
+        console.log(e);
+        if (e.origin !== appOrigin) {
+          return;
+        }
+        const payload = JSON.parse(e.data);
+        if (payload.event === "keydown") {
+          onKeyDown(payload.args[0]);
         }
       });
     </script>
