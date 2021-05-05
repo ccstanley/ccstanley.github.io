@@ -1,104 +1,111 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>My App</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
-	<!-- KaiPublisherId is optional, we're utilizing manifestURL at this moment -->
-	<!-- <script>KaiPublisherId = 'pid'</script> -->
-	<style>*:focus{border:1px solid blue;}</style>
-	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
-		        <!--
-	iframe origin: <div id="origin"></div>
-	<div id="jqueryTest">jQuery is not running.</div>
-        Javascript to execute: <textarea id="jstext" cols="30" rows="10">alert('abc')</textarea>
-	
-        <button id="send" onclick="postJS()">Send</button>
-        <script type="text/javascript">
-            document.getElementById("origin").textContent = document.domain;
-            function postJS() {
-                window.parent.postMessage(document.getElementById('jstext').value, "*");
-            }
-            postJS();
-	    $(document).ready(function() {
-	    	$("#jqueryTest").text("jQuery is running fine.");
-	    })
-        </script>
-	-->
-		<script type="text/javascript">
-			/*
-			window.addEventListener("blur", function( event ) {
-    const iframe = document.createElement('iframe')
-    iframe.src = 'https://header.kaios-analytics.com/?iframe.blur'
-    document.body.appendChild(iframe)
-    
-})
- 
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1"
+    />
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#2a400c" />
+    <style>
+      body {
+        margin: 0;
+      }
+      .navbar {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        background-color: grey;
+        height: 30px;
+      }
+      .dismissBtn {
+        float: right;
+        text-align: right;
+        padding-right: 3%;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // new URLSearchParams isn't supported on firefoxox based 48 (?)
+      function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+        let results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return "";
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+      }
 
-window.addEventListener("focus", function( event ) {
-    const iframe = document.createElement('iframe')
-    iframe.src = 'https://header.kaios-analytics.com/?iframe.focus'
-    document.body.appendChild(iframe)
-})
-
-document.addEventListener('DOMContentLoaded', function () {
-    const fr = document.createElement('iframe')
-    fr.src = 'https://header.kaios-analytics.com/?iframe.start'
-    document.body.appendChild(fr)
-})
-*/
-/*
-console.log('Log within iframe');
-const getManifestUrl = () => {
-        return new Promise(resolve => {
-            if (!navigator.mozApps || !navigator.mozApps.getSelf) {
-                resolve()
-            } else {
-                const self = navigator.mozApps.getSelf()
-                self.onsuccess = (e) => {
-                    if (e && e.target && e.target.result) {
-                        console.log('IN IFRAME', e.target.result.manifestURL)
-                    }
-                }
-            }
-        })
-    }
-getManifestUrl();
-*/			
-// 		function add(){ document.body.textContent = parseInt(document.body.textContext) + 1; }
-// 		setInterval(add, 1000);
-// window.addEventListener("blur", function( event ) {
-//     const img = new Image(1,1)
-//     img.src = 'https://header.kaios-analytics.com/?iframe.blur'
-//     document.body.appendChild(img)
-// })
- 
-
-// window.addEventListener("focus", function( event ) {
-//     const img = new Image(1,1)
-//     img.src = 'https://header.kaios-analytics.com/?iframe.focus'
-//     document.body.appendChild(img)
-// })
-	</script>
-	
-	<script>
-/*
- const o = () => {
-     console.log('iframe')
-    new MozActivity({
-        name: 'open-page',
-        data: {
-            url: 'https://api.kaiostech.com/apps/manifest/oASA_1NTK9DeepyKj4iD',
-            type: 'url',
+      const appOrigin = getParameterByName("o");
+      window.addEventListener("message", (e) => {
+        console.log(e);
+        if (e.origin !== appOrigin) {
+          return;
         }
-    })
-}
-*/
-document.addEventListener('DOMContentLoaded', function () {
-    window.parent.postMessage('alert("Hello from within-iframe!")', "*");
-})
-</script>
+        const payload = JSON.parse(e.data);
+        if (
+          payload.event === "keydown" &&
+          (payload.args[0] === "Backspace" || payload.args[0] === "EndCall")
+        ) {
+          window.parent.postMessage(
+            JSON.stringify({
+              event: "close",
+              args: [],
+            }),
+            appOrigin
+          );
+        }
+      });
+    </script>
 
-</head>
-<a onclick="o()">open from iframe</a>
+    <script
+      async="async"
+      src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+    ></script>
+    <script>
+      window.googletag = window.googletag || { cmd: [] };
+    </script>
+    <script>
+      googletag.cmd.push(function () {
+        googletag
+          .defineSlot(
+            "/37179215/MOBILE_TRAIN_LIST_BOTTOM_300X250",
+            [300, 250],
+            "div-gpt-ad-1589095880942-0"
+          )
+          .addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+        googletag.pubads().set("page_url", "indiatoday.in");
+      });
+    </script>
+    <div id="div-gpt-ad-1589095880942-0">
+      <script>
+        googletag.cmd.push(function () {
+          googletag.display("div-gpt-ad-1589095880942-0");
+        });
+      </script>
+    </div>
+
+    <nav class="navbar">
+      <span class="dismissBtn">Dismiss</span>
+    </nav>
+    <script>
+      var dismissBtn = document.getElementsByClassName("dismissBtn")[0];
+      var navbar = document.getElementsByClassName("navbar")[0];
+
+      dismissBtn.addEventListener("click", function () {
+        var msg = {
+          event: "close",
+          args: [],
+        };
+        window.parent.postMessage(JSON.stringify(msg), appOrigin);
+      });
+    </script>
+  </body>
 </html>
