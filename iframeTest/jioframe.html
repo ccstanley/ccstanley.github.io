@@ -50,6 +50,7 @@
         appOrigin: getParameterByName("o"),
         reqWidth: getParameterByName("w"),
         reqHeight: getParameterByName("h"),
+        frameID: getParameterByName("fid"),
         fullscreen: getParameterByName("fullscreen"),
       };
 
@@ -60,6 +61,7 @@
         ) {
           window.parent.postMessage(
             JSON.stringify({
+              frameID: window.kaiOpts.frameID,
               event: "close",
               args: [],
             }),
@@ -125,19 +127,18 @@
     <script>
       var dismissBtn = document.getElementsByClassName("dismissBtn")[0];
       var navbar = document.getElementsByClassName("navbar")[0];
-      if (window.kaiOpts.fullscreen === "1") {
-        navbar.style.display = "block";
-        dismissBtn.addEventListener("click", function () {
-          var msg = {
-            event: "close",
-            args: [],
-          };
-          window.parent.postMessage(
-            JSON.stringify(msg),
-            window.kaiOpts.appOrigin
-          );
-        });
-      }
+      navbar.style.display = "block";
+      dismissBtn.addEventListener("click", function () {
+        var msg = {
+          frameID: window.kaiOpts.frameID,
+          event: "close",
+          args: [],
+        };
+        window.parent.postMessage(
+          JSON.stringify(msg),
+          window.kaiOpts.appOrigin
+        );
+      });
     </script>
   </body>
 </html>
