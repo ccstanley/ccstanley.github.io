@@ -10,7 +10,8 @@
   </head>
   <body>
     <style>
-      html, body {
+      html,
+      body {
         margin: 0;
         background-color: white;
         width: 100%;
@@ -38,7 +39,7 @@
         const params = window.location.hash.substring(1).split("&");
         for (let i = 0; i < params.length; i++) {
           if (params[i].substring(0, name.length + 1) === name + "=") {
-            return decodeURIComponent(params[i].substring(2));
+            return decodeURIComponent(params[i].substring(name.length + 1));
           }
         }
         return null;
@@ -52,7 +53,10 @@
       };
 
       const onKeyDown = (key) => {
-        if (window.kaiOpts.fullscreen === "1" && ["Backspace", "EndCall", "SoftRight"].indexOf(e.key) >= 0) {
+        if (
+          window.kaiOpts.fullscreen === "1" &&
+          ["Backspace", "EndCall", "SoftRight"].indexOf(key) >= 0
+        ) {
           window.parent.postMessage(
             JSON.stringify({
               event: "close",
