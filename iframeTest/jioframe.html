@@ -35,6 +35,26 @@
       }
     </style>
     <script>
+      class AdClickDetector {
+        constructor(callback) {
+          this.cb = callback;
+        }
+        monitor(iframeQuery, document) {
+          if (this.tid) {
+            clearInterval(this.tid);
+            this.tid = null;
+          }
+          this.tid = setInterval(() => {
+            if (!this.iframe) {
+              this.iframe = document.querySelector(iframeQuery);
+            }
+            if (this.iframe && document.activeElement === this.iframe) {
+              this.iframe.blur();
+              this.cb();
+            }
+          }, 100);
+        }
+      }
       // new URLSearchParams isn't supported on firefoxox based 48 (?)
       function getParameterByName(name) {
         const params = window.location.hash.substring(1).split("&");
@@ -118,6 +138,17 @@
           const tag = document.getElementById("div-gpt-ad-1589095880942-0");
           tag.style.transform = "scale(" + scale + ")";
           tag.style.transformOrigin = "0 0";
+
+          new AdClickDetector(() => {
+            window.parent.postMessage(
+              JSON.stringify({
+                frameID: window.kaiOpts.frameID,
+                event: "click",
+                args: [],
+              }),
+              window.kaiOpts.appOrigin
+            );
+          }).monitor("div#div-gpt-ad-1589095880942-0 iframe", document);
         });
       </script>
     </div>
